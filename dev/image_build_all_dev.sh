@@ -15,11 +15,5 @@ if [[ -z "${DOCKERHUB_LOGIN}" ]]; then
     sleep 30
 fi
 
-echo "Build Service..."
-DOCKERHUB_LOGIN="${DOCKERHUB_LOGIN}" "${CUR_DIR}"/image_build_service_dev.sh
-
 echo "Build Consumer..."
 DOCKERHUB_LOGIN="${DOCKERHUB_LOGIN}" "${CUR_DIR}"/image_build_consumer_dev.sh
-
-echo "Build Full Distro..."
-DOCKERHUB_LOGIN="${DOCKERHUB_LOGIN}" "${CUR_DIR}"/image_build_atlas_dev.sh
