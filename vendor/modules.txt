@@ -2,13 +2,12 @@
 github.com/MakeNowJust/heredoc
 # github.com/Shopify/sarama v1.26.1
 github.com/Shopify/sarama
-# github.com/binarly-io/atlas v0.0.0-20200605134343-07d2c01e7edb
+# github.com/binarly-io/atlas v0.0.0-20200621132911-07b0db741511
 github.com/binarly-io/atlas/pkg/ainit
 github.com/binarly-io/atlas/pkg/api/atlas
 github.com/binarly-io/atlas/pkg/config
 github.com/binarly-io/atlas/pkg/kafka
 github.com/binarly-io/atlas/pkg/logger
-github.com/binarly-io/atlas/pkg/minio
 github.com/binarly-io/atlas/pkg/softwareid
 # github.com/davecgh/go-spew v1.1.1
 github.com/davecgh/go-spew/spew
@@ -48,8 +47,6 @@ github.com/inconshreveable/mousetrap
 # github.com/jcmturner/gofork v1.0.0
 github.com/jcmturner/gofork/encoding/asn1
 github.com/jcmturner/gofork/x/crypto/pbkdf2
-# github.com/json-iterator/go v1.1.9
-github.com/json-iterator/go
 # github.com/klauspost/compress v1.9.8
 github.com/klauspost/compress/fse
 github.com/klauspost/compress/huff0
@@ -60,23 +57,10 @@ github.com/klauspost/compress/zstd/internal/xxhash
 github.com/konsorten/go-windows-terminal-sequences
 # github.com/magiconair/properties v1.8.0
 github.com/magiconair/properties
-# github.com/minio/minio-go/v6 v6.0.55
-github.com/minio/minio-go/v6
-github.com/minio/minio-go/v6/pkg/credentials
-github.com/minio/minio-go/v6/pkg/encrypt
-github.com/minio/minio-go/v6/pkg/s3utils
-github.com/minio/minio-go/v6/pkg/set
-github.com/minio/minio-go/v6/pkg/signer
-# github.com/minio/sha256-simd v0.1.1
-github.com/minio/sha256-simd
 # github.com/mitchellh/go-homedir v1.1.0
 github.com/mitchellh/go-homedir
 # github.com/mitchellh/mapstructure v1.1.2
 github.com/mitchellh/mapstructure
-# github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421
-github.com/modern-go/concurrent
-# github.com/modern-go/reflect2 v0.0.0-20180701023420-4b7aa43c6742
-github.com/modern-go/reflect2
 # github.com/pelletier/go-toml v1.2.0
 github.com/pelletier/go-toml
 # github.com/pierrec/lz4 v2.4.1+incompatible
@@ -104,8 +88,6 @@ github.com/ulikunitz/xz/internal/hash
 github.com/ulikunitz/xz/internal/xlog
 github.com/ulikunitz/xz/lzma
 # golang.org/x/crypto v0.0.0-20200204104054-c9f3fb736b72
-golang.org/x/crypto/argon2
-golang.org/x/crypto/blake2b
 golang.org/x/crypto/md4
 golang.org/x/crypto/pbkdf2
 # golang.org/x/net v0.0.0-20200202094626-16171245cfb2
@@ -116,10 +98,8 @@ golang.org/x/net/idna
 golang.org/x/net/internal/socks
 golang.org/x/net/internal/timeseries
 golang.org/x/net/proxy
-golang.org/x/net/publicsuffix
 golang.org/x/net/trace
 # golang.org/x/sys v0.0.0-20190422165155-953cdadca894
-golang.org/x/sys/cpu
 golang.org/x/sys/unix
 # golang.org/x/text v0.3.2
 golang.org/x/text/secure/bidirule
@@ -198,8 +178,6 @@ google.golang.org/protobuf/runtime/protoimpl
 google.golang.org/protobuf/types/known/anypb
 google.golang.org/protobuf/types/known/durationpb
 google.golang.org/protobuf/types/known/timestamppb
-# gopkg.in/ini.v1 v1.42.0
-gopkg.in/ini.v1
 # gopkg.in/jcmturner/aescts.v1 v1.0.1
 gopkg.in/jcmturner/aescts.v1
 # gopkg.in/jcmturner/dnsutils.v1 v1.0.1

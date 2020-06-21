@@ -15,17 +15,15 @@
 package cmd
 
 import (
-	"context"
 	"io"
 	"os"
-	"os/signal"
-	"syscall"
 
 	"github.com/MakeNowJust/heredoc"
 	log "github.com/sirupsen/logrus"
 	cmd "github.com/spf13/cobra"
 	conf "github.com/spf13/viper"
 
+	"github.com/binarly-io/atlas/pkg/ainit"
 	"github.com/binarly-io/atlas/pkg/api/atlas"
 	"github.com/binarly-io/atlas/pkg/kafka"
 
@@ -60,27 +58,21 @@ var consumeCmd = &cmd.Command{
 	Run: func(cmd *cmd.Command, args []string) {
 		//filename := args[0]
 
-		// Set OS signals and termination context
-		ctx, cancelFunc := context.WithCancel(context.Background())
-		stopChan := make(chan os.Signal, 2)
-		signal.Notify(stopChan, os.Interrupt, syscall.SIGTERM)
-		go func() {
-			<-stopChan
-			cancelFunc()
-			<-stopChan
-			os.Exit(1)
-		}()
+		// Init termination context
+		ctx := ainit.ContextInit()
 
 		log.Infof("Starting consumer. Version:%s GitSHA:%s BuiltAt:%s\n", softwareid.Version, softwareid.GitSHA, softwareid.BuiltAt)
 		log.Infof("Press Ctrl+C to exit...")
 
 		log.Infof("Config:\n%s", config_consumer.Config.String())
-		transport := kafka.NewKafkaDataChunkTransport(
+		transport := kafka.NewDataChunkTransport(
 			nil,
 			kafka.NewConsumer(
-				kafka.Endpoint{
+				&kafka.Endpoint{
 					Brokers: config_consumer.Config.Brokers,
-					Topic:   config_consumer.Config.Topic,
+				},
+				&atlas.KafkaAddress{
+					Topic: config_consumer.Config.Topic,
 				},
 			),
 			true,
@@ -106,7 +98,7 @@ var consumeCmd = &cmd.Command{
 		//)
 		//consumer.ConsumeLoop(config_consumer.Config.ReadNewest, config_consumer.Config.Ack)
 
-		<-ctx.Done()
+		ainit.ContextWait(ctx)
 	},
 }
 

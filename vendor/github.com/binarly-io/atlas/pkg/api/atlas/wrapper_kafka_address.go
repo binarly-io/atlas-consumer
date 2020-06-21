@@ -12,8 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package kafka
+package atlas
 
-type Endpoint struct {
-	Brokers []string
+func NewKafkaAddress(topic string, partition int32) *KafkaAddress {
+	return &KafkaAddress{
+		Topic:     topic,
+		Partition: partition,
+	}
 }

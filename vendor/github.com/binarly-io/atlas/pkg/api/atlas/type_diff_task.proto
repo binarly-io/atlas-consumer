@@ -12,8 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package kafka
+syntax = "proto3";
 
-type Endpoint struct {
-	Brokers []string
+package atlas;
+
+import "type_s3_address.proto";
+
+message DiffTask {
+    S3Address a = 100;
+    S3Address b = 200;
+    S3Address meta = 300;
 }
