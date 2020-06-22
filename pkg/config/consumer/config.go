@@ -38,12 +38,7 @@ type ConfigConsumer struct {
 	// IMPORTANT
 }
 
-var Config ConfigConsumer
-
-func ReadIn() {
-	_ = conf.Unmarshal(&Config)
-}
-
+// String returns string representation of the configuration
 func (c *ConfigConsumer) String() string {
 	b := &bytes.Buffer{}
 
@@ -56,4 +51,12 @@ func (c *ConfigConsumer) String() string {
 	_, _ = fmt.Fprintf(b, "Ack: %v\n", c.Ack)
 
 	return b.String()
+}
+
+// Config is the configuration
+var Config ConfigConsumer
+
+// ReadIn reads all specified configuration sources and builds final aggregated configuration
+func ReadIn() {
+	_ = conf.Unmarshal(&Config)
 }

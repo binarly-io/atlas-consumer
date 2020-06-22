@@ -2,7 +2,7 @@
 github.com/MakeNowJust/heredoc
 # github.com/Shopify/sarama v1.26.1
 github.com/Shopify/sarama
-# github.com/binarly-io/atlas v0.0.0-20200621132911-07b0db741511
+# github.com/binarly-io/atlas v0.0.0-20200621162520-37ffb1c8ff67
 github.com/binarly-io/atlas/pkg/ainit
 github.com/binarly-io/atlas/pkg/api/atlas
 github.com/binarly-io/atlas/pkg/config

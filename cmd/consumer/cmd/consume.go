@@ -15,20 +15,17 @@
 package cmd
 
 import (
-	"io"
-	"os"
-
 	"github.com/MakeNowJust/heredoc"
+	"github.com/binarly-io/atlas/pkg/api/atlas"
+	"github.com/binarly-io/atlas/pkg/kafka"
 	log "github.com/sirupsen/logrus"
 	cmd "github.com/spf13/cobra"
 	conf "github.com/spf13/viper"
-
-	"github.com/binarly-io/atlas/pkg/ainit"
-	"github.com/binarly-io/atlas/pkg/api/atlas"
-	"github.com/binarly-io/atlas/pkg/kafka"
+	"os"
 
 	"github.com/binarly-io/atlas-consumer/pkg/config/consumer"
 	"github.com/binarly-io/atlas-consumer/pkg/softwareid"
+	"github.com/binarly-io/atlas/pkg/ainit"
 )
 
 var (
@@ -65,39 +62,7 @@ var consumeCmd = &cmd.Command{
 		log.Infof("Press Ctrl+C to exit...")
 
 		log.Infof("Config:\n%s", config_consumer.Config.String())
-		transport := kafka.NewDataChunkTransport(
-			nil,
-			kafka.NewConsumer(
-				&kafka.Endpoint{
-					Brokers: config_consumer.Config.Brokers,
-				},
-				&atlas.KafkaAddress{
-					Topic: config_consumer.Config.Topic,
-				},
-			),
-			true,
-		)
-		defer transport.Close()
-
-		f, err := atlas.OpenDataChunkFile(transport)
-		if err != nil {
-			log.Errorf("err: %v", err)
-		}
-		defer f.Close()
-
-		n, err := io.Copy(os.Stdout, f)
-		if err == nil {
-			log.Infof("written: %d", n)
-			f.PayloadMetadata.Log()
-		} else {
-			log.Errorf("err: %v", err)
-		}
-
-		//consumer := kafka.NewConsumerGroup(
-		//	config_consumer.Config.GroupID,
-		//)
-		//consumer.ConsumeLoop(config_consumer.Config.ReadNewest, config_consumer.Config.Ack)
-
+		main()
 		ainit.ContextWait(ctx)
 	},
 }
@@ -113,4 +78,23 @@ func init() {
 	}
 
 	rootCmd.AddCommand(consumeCmd)
+}
+
+func main() {
+	kafka.CopyDataChunkFile(
+		kafka.NewConsumer(
+			&kafka.Endpoint{
+				Brokers: config_consumer.Config.Brokers,
+			},
+			&atlas.KafkaAddress{
+				Topic: config_consumer.Config.Topic,
+			},
+		),
+		os.Stdout,
+	)
+
+	//consumerGroup := kafka.NewConsumerGroup(
+	//	config_consumer.Config.GroupID,
+	//)
+	//consumerGroup.ConsumeLoop(config_consumer.Config.ReadNewest, config_consumer.Config.Ack)
 }
